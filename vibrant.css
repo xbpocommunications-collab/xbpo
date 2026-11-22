@@ -1,0 +1,197 @@
+/* XBPO Visual Refresh 2026 | Vivid cobalt + electric cyan / pale-blue canvas.
+   Original emblem, navigation, content, motion and Google integration retained. */
+:root {
+ --ink:#0A1B40;
+ --paper:#F3F7FF;
+ --white:#FFFFFF;
+ --acid:#265CFF;
+ --cobalt:#265CFF;
+ --cobalt-bright:#315EFF;
+ --electric:#2BD6FB;
+ --navy:#06183D;
+ --sky:#E8F2FF;
+ --grey:#536482;
+ --line:rgba(25,68,146,.16);
+ color-scheme:light;
+}
+html {scroll-behavior:smooth}
+body {background:var(--paper); color:var(--ink)}
+::selection {background:#1F57ED;color:#fff}
+:focus-visible {outline:3px solid #16AFE9!important;outline-offset:4px}
+.noise {opacity:.012}
+a,button { -webkit-tap-highlight-color:transparent }
+/* Frosted header; cobalt CTA; authentic black-on-white emblem. */
+.site-header {background:rgba(255,255,255,.94);border:1px solid rgba(54,98,191,.16);box-shadow:0 12px 50px rgba(23,65,154,.08)}
+.site-header.scrolled {box-shadow:0 16px 58px rgba(21,64,151,.17)}
+.brand-mark {background:transparent}
+.brand-copy strong {color:#071837}
+.brand-copy small {color:#3D5280}
+.desktop-nav a {color:#1A315B}
+.desktop-nav a::after {height:2px;background:var(--cobalt)}
+.desktop-nav .nav-active {color:var(--cobalt)}
+.header-cta {background:var(--cobalt);color:#fff;box-shadow:0 9px 24px rgba(35,83,234,.23);transition:transform .25s,background .25s,box-shadow .25s}
+.header-cta:hover {background:#0D43E1;transform:translateY(-2px);box-shadow:0 14px 30px rgba(35,83,234,.31)}
+.menu-toggle span {background:var(--navy)}
+.mobile-menu {background:#fff;border-color:rgba(52,106,220,.18)}
+.mobile-menu a {color:var(--navy)}
+.mobile-menu a.nav-active {color:var(--cobalt)}
+/* First screen: crisp energy without changing the layout or content. */
+.hero, .jobs-hero, .inner-hero, .detail-hero {
+ background:
+  radial-gradient(ellipse 34% 48% at 91% 29%,rgba(64,201,255,.25),transparent 92%),
+  radial-gradient(ellipse 49% 56% at 3% 72%,rgba(81,119,255,.15),transparent 90%),
+  linear-gradient(117deg,#fff 0%,#F0F6FF 59%,#E7F1FF 100%);
+}
+.hero::before {content:'';width:clamp(110px,20vw,290px);height:clamp(110px,20vw,290px);position:absolute;left:-11vw;top:40%;border:1px solid rgba(39,89,226,.095);border-radius:50%;pointer-events:none}
+.hero h1 span,.about h2 span,.inner-hero h1 em,.detail-hero h1 em,.jobs-hero h1 em {color:var(--cobalt)}
+.eyebrow,.section-kicker {color:#2853B8}
+.eyebrow .pulse-dot,.pulse-dot,.live-dot {background:#21BAEE;box-shadow:0 0 0 6px rgba(26,191,242,.19),0 0 18px rgba(24,160,235,.25)}
+.hero-lead,.inner-hero p,.detail-hero p,.jobs-hero p {color:#3E5376}
+.hero-proof {border-top:1px solid rgba(29,83,190,.17);padding-top:23px}
+.hero-proof strong {color:#0C2B73}
+.hero-proof span,.hero-footnote {color:#536E97}
+.btn {transition:transform .25s,background .25s,box-shadow .25s}
+.btn:hover {transform:translateY(-3px)}
+.btn-dark {background:var(--cobalt);color:#fff;box-shadow:0 14px 28px rgba(30,83,225,.2)}
+.btn-dark:hover {background:#103FD6;box-shadow:0 18px 35px rgba(24,65,180,.33)}
+.btn-light {background:#32DBFC;color:#061B43;box-shadow:0 12px 26px rgba(22,191,234,.16)}
+.btn-light:hover {background:#B3F5FF;box-shadow:0 16px 28px rgba(22,191,234,.22)}
+.text-link {color:#1649D8;border-bottom-color:currentColor}
+.text-link:hover {color:#092969}
+.hero-stage {filter:drop-shadow(0 14px 35px rgba(28,86,199,.07))}
+.orb-a {background:radial-gradient(circle at 27% 25%,#D3F9FF 0%,#52C8FF 24%,#466FFE 53%,#2342BF 79%);box-shadow:0 30px 100px rgba(36,91,240,.3),0 0 80px rgba(44,203,255,.16)}
+.orb-b {background:radial-gradient(circle at 33% 25%,#A3F5FF,#1AABF4 55%,#1464DE 100%);box-shadow:0 20px 44px rgba(20,115,230,.23)}
+.stage-ring {border-color:rgba(26,77,218,.23)}
+.ring-two {border-color:rgba(23,126,234,.33)}
+.floating-card {background:rgba(255,255,255,.94);border:1px solid rgba(194,224,255,.9);box-shadow:0 28px 80px rgba(19,64,162,.18)}
+.card-main {border-top:4px solid #37CDF5}
+.card-top {color:#1A407F}
+.card-top .live-dot {background:var(--cobalt)}
+.mini-pill {background:var(--cobalt);color:#fff}
+.mock-heading {color:#102B64}
+.mock-channels span {background:#EBF4FF;border-color:#CDDEFF;color:#2152B3}
+.waveform i {background:#316DFA}
+.call-line {background:#EFF5FF}
+.call-line b {color:#173E88}
+.call-line small,.mini-card small,.mini-card span {color:#50668B}
+.avatar {background:#DBEDFF;border:1px solid #BED8FF}
+.metric-grid div {background:#0D2B79;color:#fff}
+.metric-grid span {color:#BBD5FF}
+.mini-card.one {border-top:4px solid #38D9FE}
+.mini-card.two {border-top:4px solid #315EFF}
+.float-label {background:#1648D8;color:#fff;box-shadow:0 10px 25px rgba(34,73,183,.19)}
+.float-label.label-b {background:#061D53;color:#fff}
+.float-label.label-c {background:#44DEFF;color:#05224D}
+/* A bold saturated campaign strip visually breaks up the pale hero. */
+.marquee-wrap {background:#214EDE;color:#fff;border:0;box-shadow:0 14px 40px rgba(33,85,211,.11)}
+.marquee i {color:#9CEEFF}
+/* About and service cards. */
+.about {background:#F3F7FF}
+.about-copy p {color:#354F78}
+.about-copy .muted {color:#536E92}
+.about-panel {background:radial-gradient(circle at 92% 9%,rgba(35,202,255,.49),transparent 35%),linear-gradient(128deg,#051A4C,#154ABF 92%);box-shadow:0 28px 80px rgba(20,67,160,.2)}
+.about-panel .panel-orbit {border-color:rgba(154,226,255,.54)}
+.panel-orbit::before {background:#30D8FF}
+.panel-orbit::after {background:#fff}
+.panel-content span {color:#7EE9FF}
+.panel-logo img {filter:opacity(.18)}
+.about-panel-tag {color:#D5F7FF}
+.solutions,.job-areas {background:#FFFFFF}
+.section-head p {color:#4B6384}
+.service-card {border:1px solid #D8E5FA;background:linear-gradient(145deg,#fff,#FAFCFF);box-shadow:0 8px 34px rgba(31,81,178,.025);transition:transform .32s,background .32s,box-shadow .32s,border-color .32s,color .32s}
+.service-card .num {color:#2958C8;font-weight:800}
+.service-card .icon {color:#2457EA}
+.service-symbol img {opacity:.9}
+.service-card p {color:#526584}
+.service-card a {border-top-color:#B8CDF4;color:#164FE4}
+.service-card:hover {background:linear-gradient(139deg,#0D2E84 0%,#265BFF 100%);border-color:#2C63F9;color:#fff;box-shadow:0 28px 58px rgba(33,83,197,.18)}
+.service-card:hover .num,.service-card:hover p,.service-card:hover a {color:#fff}
+.service-card:hover .service-symbol img {filter:brightness(0) invert(1);opacity:1}
+/* Campaign focus: electric cyan, not muted tan. */
+.audience-strip {background:radial-gradient(circle at 96% 0%,rgba(255,255,255,.85),transparent 41%),linear-gradient(124deg,#87EDFF,#A4D4FF 64%,#D1E8FF);color:#0B285E}
+.audience-strip .section-kicker {color:#134ABB}
+.audience-lead p {color:#274B82}
+.audience-strip .text-link {color:#113CA3}
+.audience-tags a {color:#0A2E6C;border-bottom:1px solid rgba(13,74,156,.25);transition:background .25s,padding .25s,color .25s}
+.audience-tags a:hover {color:#164BD5;background:rgba(255,255,255,.25);padding-left:14px;padding-right:10px;text-decoration:none}
+/* Night-shift process section gains depth and electric cyan highlights. */
+.process,.contact,.apply-section,.value-section,.content-cta {background:radial-gradient(circle at 96% 4%,rgba(48,113,251,.3),transparent 35%),linear-gradient(126deg,#061637 4%,#10317D 100%);color:#fff}
+.process .section-kicker,.contact .section-kicker,.apply-section .section-kicker,.value-section .section-kicker,.content-cta .section-kicker {color:#60E0FF}
+.process-intro p,.step p,.contact-copy p,.apply-intro>p,.content-cta p,.value-grid article p {color:#BECCE6}
+.process-steps,.step {border-color:rgba(196,226,255,.23)}
+.step>span {color:#64DFFF;font-weight:800}
+.process-cta {color:#7AEAFF;border-bottom-color:#7AEAFF}
+.process-cta:hover {color:#fff}
+.statement {background:#F2F8FF}
+.statement blockquote {color:#102D64}
+.statement blockquote em {color:#245CF0}
+.statement-mark img {opacity:.96}
+/* Careers: high-energy cobalt panel with contrasting white CTA. */
+.careers {background:linear-gradient(180deg,#F2F8FF,#EAF2FF)}
+.career-card {background:radial-gradient(circle at 89% 13%,rgba(61,226,255,.85),transparent 31%),linear-gradient(113deg,#1749E9,#396EFF 74%,#508DFF);color:#fff;box-shadow:0 35px 75px rgba(31,83,205,.22)}
+.career-card .section-kicker {color:#B0F4FF}
+.career-card p {color:#EDF5FF}
+.career-card .btn-dark {background:#fff;color:#1646CA;box-shadow:0 12px 32px rgba(2,24,95,.23)}
+.career-card .btn-dark:hover {background:#E2FAFF;color:#0A339C}
+.round-arrow {background:#A4F5FF;color:#0B3689}
+.career-lines,.career-lines::before,.career-lines::after {border-color:rgba(220,245,255,.34)}
+/* Enquiry and CV form: clean dark-blue field contrast, visible focus. */
+.contact-form,.application-form {background:rgba(8,34,87,.76);border:1px solid rgba(151,194,255,.28);box-shadow:0 25px 58px rgba(4,17,59,.14)}
+.contact-form label span,.application-form label>span {color:#E1EEFF}
+.contact-form input,.contact-form select,.contact-form textarea,
+.application-form input:not([type=checkbox]):not([type=file]),.application-form select,.application-form textarea {
+ background:#071C4A;border:1px solid #466397;color:#FFFFFF;
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder,.application-form input::placeholder,.application-form textarea::placeholder {color:#A8C0E3;opacity:1}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus,.application-form input:focus,.application-form select:focus,.application-form textarea:focus {border-color:#37E2FF!important;box-shadow:0 0 0 3px rgba(48,216,255,.16)}
+.contact-form .checkbox-label input,.apply-consent input {accent-color:#31CFFF}
+.form-group-header {border-bottom-color:rgba(175,206,254,.2)}
+.form-group-header>span,.application-form label em {color:#6DE6FF}
+.application-steps b {color:#78E9FF;border-color:#5290E1;background:rgba(53,123,255,.13)}
+.privacy-callout {border-color:rgba(159,211,255,.24)}
+.privacy-callout p,.apply-status {color:#C0D4EF}
+.privacy-callout a,.inner-contact .text-link {color:#75E6FF}
+.file-drop {background:rgba(34,76,145,.55);border-color:#6395E2}
+.file-drop:hover,.file-drop:focus-within {border-color:#38DDFB;background:rgba(38,98,182,.6)}
+.file-drop .upload-icon {background:#36DDFF;color:#092B72}
+.file-drop .filename {color:#73E8FF}
+/* Dedicated pages and job areas. */
+.inner-page {background:var(--paper)}
+.inner-hero .section-kicker,.detail-hero .section-kicker {color:#2451C7}
+.inner-hero-mark img,.detail-emblem img {opacity:.8}
+.split-content p,.workflow-rows p,.legal-copy p {color:#405879}
+.back-link {color:#2452C4}
+.detail-points {border-top-color:#C6D9FB}
+.detail-points li {border-left-color:#2B64F7}
+.workflow-rows,.workflow-rows article {border-color:#C6D7EF}
+.workflow-rows article>span {color:#2559D9}
+.value-grid article {border-top-color:rgba(169,206,255,.34)}
+.value-grid article span {color:#76E9FF}
+.job-area {background:#F4F8FF;border-color:#D5E6FF;box-shadow:0 8px 35px rgba(47,88,173,.04)}
+.job-area>span {color:#2F65D7;font-weight:800}
+.job-area p {color:#4C648B}
+.job-area .role-arrow {color:#2F5DF6}
+.job-area:hover {background:#E6F1FF;border-color:#77A5FF;box-shadow:0 22px 40px rgba(34,85,206,.12)}
+.jobs-disc {background:radial-gradient(circle at 30% 27%,#CFFAFF,#65D8FF 31%,#397AFF 73%,#2559D6 100%);box-shadow:25px 38px 85px rgba(37,85,226,.21)}
+.jobs-disc span {color:#09265D}
+.jobs-orbit {border-color:rgba(37,105,220,.33)}
+.jobs-floating {background:#0F2F7D;color:#fff;box-shadow:0 20px 50px rgba(22,75,159,.15)}
+.jobs-floating span {color:#7CE9FF}
+/* One consistent footer across all thirteen pages. */
+.site-footer {background:linear-gradient(128deg,#061332,#0C2969);color:#ECF5FF}
+.footer-links a,.footer-social a {color:#E1EFFF}
+.footer-links a:hover,.footer-social a:hover {color:#72E5FF}
+.footer-bottom {border-color:rgba(172,213,255,.22)}
+.footer-bottom p {color:#AFC5EA}
+/* Mobile paint/contrast remains deliberate; layout breakpoints inherit baseline. */
+@media(max-width:980px){
+ .mobile-menu {box-shadow:0 24px 45px rgba(17,62,154,.15)}
+ .hero {background:radial-gradient(circle at 90% 30%,rgba(74,195,255,.24),transparent 50%),linear-gradient(135deg,#fff,#EAF3FF)}
+}
+@media(max-width:680px){
+ .site-header {background:rgba(255,255,255,.97)}
+ .hero-proof {padding-top:16px}
+ .career-card {background:radial-gradient(circle at 96% 10%,rgba(58,226,255,.65),transparent 45%),linear-gradient(126deg,#1445D8,#386CFA)}
+ .about-panel {background:radial-gradient(circle at 90% 10%,rgba(46,198,255,.4),transparent 40%),linear-gradient(128deg,#081C4E,#1545A6)}
+}
+@media(prefers-reduced-motion:reduce){.btn:hover,.header-cta:hover {transform:none}}

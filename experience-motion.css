@@ -1,0 +1,136 @@
+/* XBPO page identity motion — logo-only, no loading screen, original black logo preserved */
+:root{--xbpo-motion-ease:cubic-bezier(.22,.76,.22,1);--xbpo-motion-blue:#146cff;--xbpo-motion-cyan:#42e8ff}
+
+/* Logo-only entrance / page-shift mark. It never covers or blocks the page. */
+.xbpo-page-loader{position:fixed;z-index:2147483000;left:50%;top:50%;width:96px;height:96px;display:grid;place-items:center;translate:-50% -50%;background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none;opacity:0;visibility:hidden;overflow:visible}
+.xbpo-page-loader::before,.xbpo-page-loader::after{display:none!important;content:none!important}
+.xbpo-page-loader img{display:block;width:88px;height:88px;object-fit:contain;opacity:0;transform-origin:50% 50%;filter:drop-shadow(0 12px 22px rgba(5,20,45,.22));will-change:transform,opacity,filter,clip-path}
+body.xbpo-logo-show .xbpo-page-loader{opacity:1;visibility:visible}
+body.xbpo-logo-show .xbpo-page-loader img{animation-duration:.72s;animation-timing-function:var(--xbpo-motion-ease);animation-fill-mode:both}
+body.xbpo-logo-show .xbpo-page-loader.is-exit img{animation-duration:.42s}
+
+/* Every page gets its own logo motion. No recolouring, masks or full-screen overlay. */
+.xbpo-page-loader[data-motion="home"] img{animation-name:xbpoLogoHome}
+.xbpo-page-loader[data-motion="about"] img{animation-name:xbpoLogoAbout}
+.xbpo-page-loader[data-motion="services"] img{animation-name:xbpoLogoServices}
+.xbpo-page-loader[data-motion="process"] img{animation-name:xbpoLogoProcess}
+.xbpo-page-loader[data-motion="careers"] img{animation-name:xbpoLogoCareers}
+.xbpo-page-loader[data-motion="contact"] img{animation-name:xbpoLogoContact}
+.xbpo-page-loader[data-motion="privacy"] img{animation-name:xbpoLogoPrivacy}
+.xbpo-page-loader[data-motion="final-expense"] img{animation-name:xbpoLogoFinal}
+.xbpo-page-loader[data-motion="outbound"] img{animation-name:xbpoLogoOutbound}
+.xbpo-page-loader[data-motion="lead-generation"] img{animation-name:xbpoLogoLead}
+.xbpo-page-loader[data-motion="handoff"] img{animation-name:xbpoLogoHandoff}
+.xbpo-page-loader[data-motion="quality"] img{animation-name:xbpoLogoQuality}
+.xbpo-page-loader[data-motion="operations"] img{animation-name:xbpoLogoOps}
+.xbpo-page-loader[data-motion="fronter"] img{animation-name:xbpoLogoFronter}
+.xbpo-page-loader[data-motion="closer"] img{animation-name:xbpoLogoCloser}
+.xbpo-page-loader[data-motion="verifier"] img{animation-name:xbpoLogoVerifier}
+
+@keyframes xbpoLogoHome{0%{opacity:0;transform:scale(.46) rotate(-22deg)}58%{opacity:1;transform:scale(1.08) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes xbpoLogoAbout{0%{opacity:0;transform:translateX(-42px) scale(.84) rotate(-7deg)}70%{opacity:1;transform:translateX(4px) scale(1.02) rotate(1deg)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoServices{0%{opacity:0;transform:scale(.9);clip-path:inset(0 100% 0 0)}60%{opacity:1;clip-path:inset(0 0 0 0);transform:scale(1.04)}100%{opacity:1;transform:scale(1);clip-path:inset(0)}}
+@keyframes xbpoLogoProcess{0%{opacity:0;transform:translateY(-34px) scale(.78)}48%{opacity:1;transform:translateY(7px) scale(1.04)}72%{transform:translateY(-3px) scale(.99)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoCareers{0%{opacity:0;transform:translateY(34px) rotate(8deg) scale(.78)}68%{opacity:1;transform:translateY(-4px) rotate(-2deg) scale(1.04)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoContact{0%{opacity:0;transform:scale(.38) rotate(16deg)}52%{opacity:1;transform:scale(1.12) rotate(-3deg)}76%{transform:scale(.96) rotate(1deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes xbpoLogoPrivacy{0%{opacity:0;transform:scale(.92);filter:blur(9px) drop-shadow(0 12px 22px rgba(5,20,45,.22))}100%{opacity:1;transform:scale(1);filter:blur(0) drop-shadow(0 12px 22px rgba(5,20,45,.22))}}
+@keyframes xbpoLogoFinal{0%{opacity:0;transform:scale(.58)}45%{opacity:1;transform:scale(1.13)}68%{transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
+@keyframes xbpoLogoOutbound{0%{opacity:0;transform:translateX(52px) rotate(9deg) scale(.86)}70%{opacity:1;transform:translateX(-4px) rotate(-1deg) scale(1.02)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoLead{0%{opacity:0;transform:translateY(42px) scale(.74)}62%{opacity:1;transform:translateY(-6px) scale(1.05)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoHandoff{0%{opacity:0;transform:translate(-30px,28px) rotate(-13deg) scale(.82)}68%{opacity:1;transform:translate(4px,-4px) rotate(2deg) scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoQuality{0%{opacity:0;transform:perspective(500px) rotateY(72deg) scale(.8)}72%{opacity:1;transform:perspective(500px) rotateY(-6deg) scale(1.02)}100%{opacity:1;transform:perspective(500px) rotateY(0) scale(1)}}
+@keyframes xbpoLogoOps{0%{opacity:0;transform:rotate(-15deg) scale(.72)}52%{opacity:1;transform:rotate(5deg) scale(1.06)}75%{transform:rotate(-2deg) scale(.98)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoFronter{0%{opacity:0;transform:translateX(-54px) scale(.82)}64%{opacity:1;transform:translateX(5px) scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoCloser{0%{opacity:0;transform:translateX(54px) scale(.82)}64%{opacity:1;transform:translateX(-5px) scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes xbpoLogoVerifier{0%{opacity:0;transform:scale(.32) rotate(-9deg)}50%{opacity:1;transform:scale(1.11) rotate(2deg)}72%{transform:scale(.95) rotate(-1deg)}100%{opacity:1;transform:none}}
+
+/* Header brand remains the original asset; only position/scale animates. */
+.site-header .brand-mark{position:relative;isolation:isolate;transform-origin:center}
+.site-header .brand-mark img{transition:transform .38s var(--xbpo-motion-ease),filter .38s ease}
+.site-header .brand:hover .brand-mark img{transform:translateY(-2px) rotate(-4deg) scale(1.045);filter:drop-shadow(0 8px 16px rgba(20,108,255,.18))}
+body.xbpo-motion-ready .site-header .brand-mark{animation:xbpoBrandLand .58s .05s var(--xbpo-motion-ease) both}
+.site-header::after{content:"";position:absolute;left:50%;bottom:-1px;width:min(1180px,calc(100% - 48px));height:1px;translate:-50% 0;background:linear-gradient(90deg,transparent,rgba(20,108,255,.5),rgba(66,232,255,.62),transparent);transform:scaleX(0);transform-origin:center;opacity:.5;pointer-events:none}
+body.xbpo-motion-ready .site-header::after{animation:xbpoHeaderSweep .9s .09s var(--xbpo-motion-ease) both}
+
+/* Page-specific hero choreography: different feel without turning pages into splash screens. */
+body.xbpo-motion-ready .hero-copy>*:not(.hero-actions),body.xbpo-motion-ready .sp-hero-copy>*,body.xbpo-motion-ready .role-detail-grid>div:first-child>*{animation:xbpoContentRise .66s var(--xbpo-motion-ease) both}
+body.xbpo-motion-ready .hero-copy>*:nth-child(2),body.xbpo-motion-ready .sp-hero-copy>*:nth-child(2),body.xbpo-motion-ready .role-detail-grid>div:first-child>*:nth-child(2){animation-delay:.05s}
+body.xbpo-motion-ready .hero-copy>*:nth-child(3),body.xbpo-motion-ready .sp-hero-copy>*:nth-child(3),body.xbpo-motion-ready .role-detail-grid>div:first-child>*:nth-child(3){animation-delay:.1s}
+body.xbpo-motion-ready .hero-actions,body.xbpo-motion-ready .sp-actions{animation:xbpoContentRise .66s .14s var(--xbpo-motion-ease) both}
+body.xbpo-motion-ready .hero-stage,body.xbpo-motion-ready .sp-hero-visual,body.xbpo-motion-ready .role-meta{animation:xbpoVisualArrive .82s .07s var(--xbpo-motion-ease) both}
+
+/* Extra distinction by page family. */
+body[data-xbpo-page="about"].xbpo-motion-ready main>section:first-child .sp-rail{animation:xbpoSectionLeft .72s var(--xbpo-motion-ease) both}
+body[data-xbpo-page="services"].xbpo-motion-ready main>section:first-child .sp-rail{animation:xbpoSectionScale .72s var(--xbpo-motion-ease) both}
+body[data-xbpo-page="process"].xbpo-motion-ready main>section:first-child .sp-rail{animation:xbpoSectionDrop .72s var(--xbpo-motion-ease) both}
+body[data-xbpo-page="careers"].xbpo-motion-ready main>section:first-child .sp-rail{animation:xbpoSectionLift .72s var(--xbpo-motion-ease) both}
+body[data-xbpo-page="contact"].xbpo-motion-ready main>section:first-child .sp-rail{animation:xbpoSectionSoft .72s var(--xbpo-motion-ease) both}
+body[data-xbpo-page^="role-"] .role-meta{transform-origin:50% 0}
+
+/* Card and button polish */
+.sp-btn,.btn,.header-cta,.role-card{position:relative;overflow:hidden}
+.sp-btn::before,.btn::before,.header-cta::before{content:"";position:absolute;inset:-2px auto -2px -35%;width:26%;transform:skewX(-22deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);opacity:0;transition:left .65s var(--xbpo-motion-ease),opacity .25s ease;pointer-events:none}
+.sp-btn:hover::before,.btn:hover::before,.header-cta:hover::before{left:110%;opacity:.75}
+.role-card .arrow{transition:transform .38s var(--xbpo-motion-ease),background .38s ease}
+.role-card:hover .arrow{transform:translate(4px,-4px) rotate(7deg)}
+.role-route{display:block;margin-top:20px;padding-top:15px;border-top:1px solid rgba(7,22,47,.10);font-size:11px;font-weight:700;letter-spacing:.05em;color:#44708f}
+.role-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.deep-flow-three{grid-template-columns:1fr auto 1fr auto 1fr!important}
+
+/* Ambient motion stays behind content and remains restrained. */
+.subpage main{position:relative;isolation:isolate;transition:opacity .26s ease,transform .26s ease}
+.subpage main::before{content:"";position:absolute;z-index:-1;top:9%;right:-12vw;width:34vw;height:34vw;border-radius:50%;background:radial-gradient(circle,rgba(66,232,255,.08),rgba(20,108,255,.035) 42%,transparent 70%);animation:xbpoAmbientFloat 10s ease-in-out infinite;pointer-events:none}
+body.xbpo-page-leaving main{opacity:.9;transform:translateY(2px) scale(.999)}
+
+@keyframes xbpoBrandLand{0%{opacity:0;transform:translateY(-8px) scale(.8) rotate(-6deg)}70%{opacity:1;transform:translateY(1px) scale(1.035) rotate(1deg)}100%{transform:none}}
+@keyframes xbpoHeaderSweep{0%{transform:scaleX(0);opacity:0}48%{opacity:.8}100%{transform:scaleX(1);opacity:.32}}
+@keyframes xbpoContentRise{0%{opacity:0;transform:translateY(17px);filter:blur(2px)}100%{opacity:1;transform:none;filter:none}}
+@keyframes xbpoVisualArrive{0%{opacity:0;transform:translate3d(24px,10px,0) scale(.965)}100%{opacity:1;transform:none}}
+@keyframes xbpoSectionLeft{0%{opacity:0;transform:translateX(-18px)}100%{opacity:1;transform:none}}
+@keyframes xbpoSectionScale{0%{opacity:0;transform:scale(.975)}100%{opacity:1;transform:scale(1)}}
+@keyframes xbpoSectionDrop{0%{opacity:0;transform:translateY(-14px)}100%{opacity:1;transform:none}}
+@keyframes xbpoSectionLift{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:none}}
+@keyframes xbpoSectionSoft{0%{opacity:0;filter:blur(4px)}100%{opacity:1;filter:none}}
+@keyframes xbpoAmbientFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-3vw,3vh,0) scale(1.08)}}
+
+@media(max-width:760px){.xbpo-page-loader{width:76px;height:76px}.xbpo-page-loader img{width:70px;height:70px}.role-grid-three{grid-template-columns:1fr!important}.deep-flow-three{grid-template-columns:1fr!important}.deep-flow-three>i{transform:rotate(90deg);justify-self:center}.site-header::after{width:calc(100% - 28px)}}
+@media(prefers-reduced-motion:reduce){.xbpo-page-loader{display:none!important}.site-header .brand-mark,.site-header::after,.hero-copy>*,.sp-hero-copy>*,.role-detail-grid>div:first-child>*,.hero-stage,.sp-hero-visual,.role-meta,.subpage main::before,main>section:first-child .sp-rail{animation:none!important;transition-duration:.01ms!important}.sp-btn::before,.btn::before,.header-cta::before{display:none!important}}
+
+/* 2026-09-29 refinement: no floating/central loader. Animate the real header logo instead. */
+.xbpo-page-loader{display:none!important}
+body.xbpo-motion-ready .site-header .brand-mark{animation-duration:.64s;animation-delay:.03s;animation-timing-function:var(--xbpo-motion-ease);animation-fill-mode:both}
+body[data-xbpo-page="home"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoHome}
+body[data-xbpo-page="about"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoAbout}
+body[data-xbpo-page="services"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoServices}
+body[data-xbpo-page="process"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoProcess}
+body[data-xbpo-page="careers"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoCareers}
+body[data-xbpo-page="contact"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoContact}
+body[data-xbpo-page="privacy"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoPrivacy}
+body[data-xbpo-page="final-expense"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoFinal}
+body[data-xbpo-page="outbound"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoOutbound}
+body[data-xbpo-page="lead-generation"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoLead}
+body[data-xbpo-page="handoff"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoHandoff}
+body[data-xbpo-page="quality"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoQuality}
+body[data-xbpo-page="operations"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoOps}
+body[data-xbpo-page="role-fronter"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoFronter}
+body[data-xbpo-page="role-closer"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoCloser}
+body[data-xbpo-page="role-verifier"].xbpo-motion-ready .site-header .brand-mark{animation-name:xbpoHeaderLogoVerifier}
+
+@keyframes xbpoHeaderLogoHome{0%{opacity:0;transform:scale(.72) rotate(-8deg)}70%{opacity:1;transform:scale(1.05) rotate(1deg)}100%{transform:none}}
+@keyframes xbpoHeaderLogoAbout{0%{opacity:0;transform:translateX(-16px) scale(.9)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoServices{0%{opacity:0;transform:scale(.84)}55%{opacity:1;transform:scale(1.06)}100%{transform:none}}
+@keyframes xbpoHeaderLogoProcess{0%{opacity:0;transform:translateY(-13px) rotate(-4deg)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoCareers{0%{opacity:0;transform:translateY(13px) scale(.9)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoContact{0%{opacity:0;transform:rotate(10deg) scale(.8)}65%{opacity:1;transform:rotate(-2deg) scale(1.04)}100%{transform:none}}
+@keyframes xbpoHeaderLogoPrivacy{0%{opacity:0;filter:blur(5px)}100%{opacity:1;filter:none}}
+@keyframes xbpoHeaderLogoFinal{0%{opacity:0;transform:scale(.68)}60%{opacity:1;transform:scale(1.08)}100%{transform:none}}
+@keyframes xbpoHeaderLogoOutbound{0%{opacity:0;transform:translateX(18px) rotate(5deg)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoLead{0%{opacity:0;transform:translateY(15px) scale(.84)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoHandoff{0%{opacity:0;transform:translate(-12px,10px) rotate(-7deg)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoQuality{0%{opacity:0;transform:perspective(300px) rotateY(55deg)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoOps{0%{opacity:0;transform:rotate(-10deg) scale(.85)}65%{opacity:1;transform:rotate(2deg) scale(1.03)}100%{transform:none}}
+@keyframes xbpoHeaderLogoFronter{0%{opacity:0;transform:translateX(-18px)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoCloser{0%{opacity:0;transform:translateX(18px)}100%{opacity:1;transform:none}}
+@keyframes xbpoHeaderLogoVerifier{0%{opacity:0;transform:scale(.75) rotate(-5deg)}70%{opacity:1;transform:scale(1.04) rotate(1deg)}100%{transform:none}}
+
+@media(prefers-reduced-motion:reduce){body.xbpo-motion-ready .site-header .brand-mark{animation:none!important}}

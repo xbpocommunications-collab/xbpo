@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07162f" />
+  <title>Admin Portal | XBPO Communications</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="adminToast" class="adm-toast" role="status" aria-live="polite"></div>
+
+  <!-- LOGIN SCREEN -->
+  <section id="loginScreen" class="adm-login-wrap">
+    <div class="adm-login-card">
+      <div class="adm-brand-row">
+        <img src="assets/xbpo-original-white.png" alt="XBPO Communications" width="44" height="44" />
+        <div>
+          <strong>XBPO COMMUNICATIONS</strong>
+          <span>Admin &amp; Lead Sync Portal</span>
+        </div>
+      </div>
+
+      <h1>Sign in to Admin Portal</h1>
+      <p class="adm-sub">Private administrator sign-in. Manage job leads, campaign enquiries, careers form roles, live social media links, and Google Sheets &amp; Drive sync verification.</p>
+
+      <form id="adminLoginForm" class="adm-form">
+        <div id="loginErrorBox" style="display:none;background:#fee2e2;border:1px solid #fca5a5;color:#991b1b;padding:10px 12px;border-radius:10px;font-size:.9rem;line-height:1.45;"></div>
+        <label>
+          <span>Admin Email</span>
+          <input id="loginEmail" type="email" required autocomplete="username" placeholder="Enter your authorized admin email" />
+        </label>
+        <label>
+          <span>Password</span>
+          <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter your password" />
+        </label>
+        <button type="submit" class="adm-btn primary full">Sign in to Admin Portal</button>
+      </form>
+
+      <div class="adm-login-foot">
+        <a href="/">← Back to XBPO Website</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboardScreen" class="adm-shell" style="display:none;">
+    <header class="adm-topbar">
+      <div class="adm-topbar-left">
+        <a href="/" class="adm-logo-link">
+          <img src="assets/xbpo-original-white.png" alt="XBPO" width="36" height="36" />
+          <div>
+            <strong>XBPO Admin Portal</strong>
+            <small id="currentAdminBadge">Admin</small>
+          </div>
+        </a>
+      </div>
+      <div class="adm-topbar-right">
+        <span id="workspaceAuthStatus" class="adm-ws-pill is-disconnected">Google Drive &amp; Sheets disconnected</span>
+        <button id="connectGoogleBtn" type="button" class="adm-btn ghost">Connect Google Drive &amp; Sheets</button>
+        <a href="/" class="adm-btn ghost">View Website ↗</a>
+        <button id="logoutBtn" type="button" class="adm-btn danger">Sign out</button>
+      </div>
+    </header>
+
+    <nav class="adm-tabs" aria-label="Admin sections">
+      <button type="button" class="adm-tab is-active" data-tab="panelOverview">Overview &amp; Sheet/Drive Sync</button>
+      <button type="button" class="adm-tab" data-tab="panelJobs">Job Applications</button>
+      <button type="button" class="adm-tab" data-tab="panelEnquiries">Contact Enquiries</button>
+      <button type="button" class="adm-tab" data-tab="panelRoles">Career Roles</button>
+      <button type="button" class="adm-tab" data-tab="panelSettings">Social Links &amp; Site Settings</button>
+      <button type="button" class="adm-tab" data-tab="panelUsers">Users &amp; Password</button>
+      <button type="button" class="adm-tab" data-tab="panelDatabase">Database &amp; Audit Logs</button>
+    </nav>
+
+    <main class="adm-main">
+      <!-- OVERVIEW -->
+      <section id="panelOverview" class="adm-panel is-active">
+        <div class="adm-stats">
+          <article class="adm-stat-card"><span>Job Applications</span><strong id="statTotalJobs">0</strong></article>
+          <article class="adm-stat-card"><span>Contact Enquiries</span><strong id="statTotalEnquiries">0</strong></article>
+          <article class="adm-stat-card"><span>Sheet &amp; Drive Synced</span><strong id="statSynced">0</strong></article>
+          <article class="adm-stat-card"><span>Pending Sync</span><strong id="statPending">0</strong></article>
+        </div>
+
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Google Sheets &amp; Google Drive Auto-Configuration (Firebase Connected)</h2>
+              <p>Click <strong>Connect Google Drive &amp; Sheets</strong> once — Firebase automatically authenticates your Google account, creates <strong>1 Main Website Folder</strong> with <strong>separate subfolders for each form</strong>, and creates your <strong>Google Sheet with separate tabs &amp; headers</strong> (no IDs needed).</p>
+            </div>
+            <div class="adm-btn-group">
+              <button id="autoCreateWorkspaceBtn" type="button" class="adm-btn outline" disabled>Re-Create Sheet &amp; Folders</button>
+              <button id="syncAllBtn" type="button" class="adm-btn primary" disabled>Sync Pending</button>
+              <button id="resyncAllBtn" type="button" class="adm-btn outline" disabled>Re-Sync All Records</button>
+              <button id="verifyAllBtn" type="button" class="adm-btn success" disabled>Verify Sheet &amp; Drive Status</button>
+            </div>
+          </div>
+          <div class="adm-quick-links">
+            <a id="openMainFolderLink" href="#" target="_blank" rel="noopener noreferrer" class="adm-btn outline" style="display:none;">Open Main Website Folder ↗</a>
+            <a id="openDriveLink" href="#" target="_blank" rel="noopener noreferrer" class="adm-btn outline" style="display:none;">Open Careers CV Folder ↗</a>
+            <a id="openContactFolderLink" href="#" target="_blank" rel="noopener noreferrer" class="adm-btn outline" style="display:none;">Open Contact Form Folder ↗</a>
+            <a id="openSheetLink" href="#" target="_blank" rel="noopener noreferrer" class="adm-btn outline" style="display:none;">Open Master Google Sheet ↗</a>
+            <span class="adm-db-pill">Active Storage: <b id="statDbMode">—</b></span>
+          </div>
+        </div>
+
+        <details class="adm-card">
+          <summary style="cursor:pointer;font-weight:700;font-size:1rem;">Advanced: Switch or Browse Existing Google Sheet / Drive Folder Manually (Optional)</summary>
+          <div class="adm-card-head" style="margin-top:16px;">
+            <div>
+              <h2>Switch Active Google Sheet &amp; Drive Folder</h2>
+              <p>Optional: browse your existing Google Drive account or create a standalone Sheet/Folder.</p>
+            </div>
+            <div class="adm-btn-group">
+              <button id="browseDriveBtn" type="button" class="adm-btn outline" disabled>Load My Sheets &amp; Folders</button>
+              <button id="createSheetOnlyBtn" type="button" class="adm-btn outline" disabled>Create New Sheet</button>
+              <button id="createFolderOnlyBtn" type="button" class="adm-btn outline" disabled>Create New Drive Folder</button>
+            </div>
+          </div>
+          <form id="switchWorkspaceForm" class="adm-grid-form">
+            <label>
+              <span>Select from Your Google Sheets</span>
+              <select id="browseSheetSelect" disabled>
+                <option value="">Click "Load My Sheets &amp; Folders" above…</option>
+              </select>
+            </label>
+            <label>
+              <span>Select from Your Drive Folders</span>
+              <select id="browseFolderSelect" disabled>
+                <option value="">Click "Load My Sheets &amp; Folders" above…</option>
+              </select>
+            </label>
+            <label>
+              <span>Active Google Sheet URL or ID</span>
+              <input id="switchSheetInput" type="text" maxlength="300" placeholder="https://docs.google.com/spreadsheets/d/... or Sheet ID" />
+            </label>
+            <label>
+              <span>Active Google Drive Folder URL or ID</span>
+              <input id="switchFolderInput" type="text" maxlength="300" placeholder="https://drive.google.com/drive/folders/... or Folder ID" />
+            </label>
+            <div class="adm-form-actions">
+              <button id="switchWorkspaceBtn" type="submit" class="adm-btn primary">Switch Active Sheet &amp; Drive Target</button>
+            </div>
+          </form>
+        </details>
+      </section>
+
+      <!-- JOB APPLICATIONS -->
+      <section id="panelJobs" class="adm-panel">
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Job Applications (Careers Leads)</h2>
+              <p>Includes Fronter, Closer, Verifier, and Team Lead candidates with Drive CV verification, inline editing, and CSV export.</p>
+            </div>
+            <div class="adm-filters">
+              <select id="jobRoleFilter" aria-label="Filter by role">
+                <option value="">All Roles</option>
+                <option value="Fronter">Fronter</option>
+                <option value="Closer">Closer</option>
+                <option value="Verifier">Verifier</option>
+                <option value="Team Lead">Team Lead</option>
+              </select>
+              <input id="jobSearchInput" type="search" placeholder="Search name, email, city, receipt..." />
+              <a id="exportJobsBtn" href="/api/admin/export/jobs" class="adm-btn outline" download="xbpo-jobs-export.csv">Export CSV</a>
+            </div>
+          </div>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Role &amp; Exp</th>
+                  <th>CV (Google Drive)</th>
+                  <th>Sheet &amp; Drive Status</th>
+                  <th>Review</th>
+                  <th>Received</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="jobsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT ENQUIRIES -->
+      <section id="panelEnquiries" class="adm-panel">
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Campaign &amp; Contact Enquiries</h2>
+              <p>All submissions from the homepage and contact page with inline editing and CSV export.</p>
+            </div>
+            <div class="adm-filters">
+              <input id="enquirySearchInput" type="search" placeholder="Search name, email, company, service..." />
+              <a id="exportEnquiriesBtn" href="/api/admin/export/enquiries" class="adm-btn outline" download="xbpo-enquiries-export.csv">Export CSV</a>
+            </div>
+          </div>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Contact</th>
+                  <th>Service</th>
+                  <th>Sheet Sync Status</th>
+                  <th>Review</th>
+                  <th>Received</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="enquiriesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAREER ROLES MANAGEMENT -->
+      <section id="panelRoles" class="adm-panel">
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Career Form Roles Management</h2>
+              <p>Add, rename, reorder, hide, or delete roles shown in the public Careers application form (e.g., Fronter, Closer, Verifier, Team Lead, Quality Analyst).</p>
+            </div>
+          </div>
+          <form id="addRoleForm" class="adm-grid-form">
+            <label>
+              <span>Role Name</span>
+              <input id="newRoleName" type="text" required minlength="2" maxlength="100" placeholder="e.g., Quality Analyst" />
+            </label>
+            <label>
+              <span>Display Order</span>
+              <input id="newRoleOrder" type="number" min="0" max="999" value="5" />
+            </label>
+            <label class="is-full">
+              <span>Role Summary / Description (optional)</span>
+              <input id="newRoleDesc" type="text" maxlength="255" placeholder="Brief description of this role on the calling floor" />
+            </label>
+            <div class="adm-form-actions">
+              <button type="submit" class="adm-btn primary">Add Career Role</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="adm-card">
+          <h2>Configured Careers Form Roles</h2>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Role Name</th>
+                  <th>Description</th>
+                  <th>Form Visibility</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="rolesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOCIAL MEDIA & SETTINGS -->
+      <section id="panelSettings" class="adm-panel">
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Social Media Links &amp; Website Settings</h2>
+              <p>Editing any social media link or contact email below automatically updates every page and footer across the entire XBPO website.</p>
+            </div>
+          </div>
+          <form id="settingsForm" class="adm-grid-form">
+            <label>
+              <span>Instagram URL</span>
+              <input id="setInstagram" type="url" required maxlength="300" placeholder="https://www.instagram.com/..." />
+            </label>
+            <label>
+              <span>Facebook URL</span>
+              <input id="setFacebook" type="url" required maxlength="300" placeholder="https://www.facebook.com/..." />
+            </label>
+            <label>
+              <span>Google Business / Share URL</span>
+              <input id="setGoogle" type="url" required maxlength="300" placeholder="https://share.google/..." />
+            </label>
+            <label>
+              <span>Public Contact Email</span>
+              <input id="setContactEmail" type="email" required maxlength="150" />
+            </label>
+            <label>
+              <span>Public Phone Number</span>
+              <input id="setContactPhone" type="text" required maxlength="32" />
+            </label>
+            <label>
+              <span>Google Apps Script URL (Optional /exec)</span>
+              <input id="setAppsScriptUrl" type="url" maxlength="300" placeholder="https://script.google.com/macros/s/.../exec" />
+            </label>
+            <label>
+              <span>Google Spreadsheet URL or ID</span>
+              <input id="setSpreadsheetId" type="text" maxlength="300" placeholder="Paste Google Sheet URL or ID" />
+            </label>
+            <label>
+              <span>Google Drive CV Folder URL or ID</span>
+              <input id="setDriveFolderId" type="text" maxlength="300" placeholder="Paste Google Drive Folder URL or ID" />
+            </label>
+            <div class="adm-form-actions">
+              <button type="submit" class="adm-btn primary">Save &amp; Publish Across Website</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- USERS & PASSWORD -->
+      <section id="panelUsers" class="adm-panel">
+        <div class="adm-two-col">
+          <div class="adm-card">
+            <h2>Change My Password</h2>
+            <p class="adm-muted">Update your password using scrypt salted hashing.</p>
+            <form id="changePasswordForm" class="adm-form">
+              <label><span>Current Password</span><input id="cpCurrent" type="password" required minlength="8" maxlength="128" /></label>
+              <label><span>New Password (min 8 chars)</span><input id="cpNew" type="password" required minlength="8" maxlength="128" /></label>
+              <label><span>Confirm New Password</span><input id="cpConfirm" type="password" required minlength="8" maxlength="128" /></label>
+              <button type="submit" class="adm-btn primary">Update Password</button>
+            </form>
+          </div>
+
+          <div id="addUserCard" class="adm-card">
+            <h2>Add Admin / Reviewer User (Master Only)</h2>
+            <p class="adm-muted">Grant Admin Portal access to team members.</p>
+            <form id="addUserForm" class="adm-form">
+              <label><span>Full Name</span><input id="nuName" type="text" required minlength="2" maxlength="100" /></label>
+              <label><span>Email Address</span><input id="nuEmail" type="email" required maxlength="150" /></label>
+              <label>
+                <span>Role</span>
+                <select id="nuRole" required>
+                  <option value="admin">Admin (Manage Leads &amp; Settings)</option>
+                  <option value="reviewer">Reviewer (View &amp; Sync Leads)</option>
+                </select>
+              </label>
+              <label><span>Initial Password (min 8 chars)</span><input id="nuPassword" type="password" required minlength="8" maxlength="128" /></label>
+              <button type="submit" class="adm-btn primary">Create User</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="adm-card">
+          <h2>Authorized Portal Users</h2>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATABASE & LOGS -->
+      <section id="panelDatabase" class="adm-panel">
+        <div class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Hosting Database Upload &amp; Connection (MariaDB v10.6.28 — localhost:3306)</h2>
+              <p>On <strong>Plesk Shared Hosting (PHP + MariaDB v10.6.28 — no Node.js needed)</strong>: import <code>xbpo_mariadb_schema.sql</code> in phpMyAdmin, upload the contents of <code>xbpo_website_demo/</code> into <code>httpdocs/</code>, and place the generated <code>.env</code> file inside <code>httpdocs/</code>. All queries use prepared statements (<code>?</code>).</p>
+            </div>
+            <div class="adm-btn-group">
+              <a href="/api/admin/mariadb-schema?download=1" class="adm-btn primary" download="xbpo_mariadb_schema.sql">Download .sql Schema</a>
+              <button id="loadSchemaBtn" type="button" class="adm-btn outline">Preview SQL Schema</button>
+            </div>
+          </div>
+          <div id="dbStatusSummary" class="adm-db-status-grid"></div>
+          <pre id="schemaPreview" class="adm-code">Click "Preview SQL Schema" or "Download .sql Schema" for Plesk / phpMyAdmin import.</pre>
+        </div>
+
+        <div id="envGeneratorCard" class="adm-card">
+          <div class="adm-card-head">
+            <div>
+              <h2>Hosting <code>.env</code> Credentials Generator (Local Browser Only)</h2>
+              <p>Format your hosting database credentials into a ready-to-upload <code>.env</code> file. Credentials entered here stay strictly in your browser and are never stored by this server.</p>
+            </div>
+            <div class="adm-btn-group">
+              <button id="genSecretBtn" type="button" class="adm-btn outline">Generate Session Secret</button>
+              <button id="copyEnvBtn" type="button" class="adm-btn outline">Copy .env</button>
+              <button id="downloadEnvBtn" type="button" class="adm-btn primary">Download .env</button>
+            </div>
+          </div>
+          <form id="envGeneratorForm" class="adm-grid-form">
+            <label>
+              <span>MYSQL_HOST</span>
+              <input id="envHost" type="text" value="localhost" autocomplete="off" />
+            </label>
+            <label>
+              <span>MYSQL_PORT</span>
+              <input id="envPort" type="text" value="3306" autocomplete="off" />
+            </label>
+            <label>
+              <span>MYSQL_DATABASE</span>
+              <input id="envDb" type="text" value="xbpoandcom_xbpo" autocomplete="off" />
+            </label>
+            <label>
+              <span>MYSQL_USER</span>
+              <input id="envUser" type="text" placeholder="your_plesk_db_user" autocomplete="off" />
+            </label>
+            <label>
+              <span>MYSQL_PASSWORD</span>
+              <input id="envPass" type="password" placeholder="your_plesk_db_password" autocomplete="new-password" />
+            </label>
+            <label>
+              <span>SESSION_SECRET (min 32 chars)</span>
+              <input id="envSecret" type="text" placeholder="Click Generate Session Secret" autocomplete="off" />
+            </label>
+          </form>
+          <pre id="envOutputPreview" class="adm-code" style="margin-top:16px;"></pre>
+        </div>
+
+        <div class="adm-card">
+          <h2>Sync &amp; Security Audit Logs</h2>
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Action</th>
+                  <th>Status</th>
+                  <th>Detail</th>
+                  <th>Actor</th>
+                </tr>
+              </thead>
+              <tbody id="logsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- DETAIL MODAL -->
+  <div id="detailModal" class="adm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="adm-modal-card">
+      <div class="adm-modal-head">
+        <h3 id="detailTitle">Details</h3>
+        <button id="detailCloseBtn" type="button" class="adm-mini-btn">Close</button>
+      </div>
+      <div id="detailBody" class="adm-detail-body"></div>
+    </div>
+  </div>
+
+  <!-- EDIT RECORD MODAL -->
+  <div id="editModal" class="adm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="adm-modal-card">
+      <div class="adm-modal-head">
+        <h3 id="editModalTitle">Edit Record</h3>
+        <button id="editCloseBtn" type="button" class="adm-mini-btn">Close</button>
+      </div>
+      <form id="editRecordForm" class="adm-form">
+        <div id="editFieldsWrap" class="adm-grid-form"></div>
+        <div class="adm-modal-actions">
+          <button id="editCancelBtn" type="button" class="adm-btn outline">Cancel</button>
+          <button type="submit" class="adm-btn primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT ROLE MODAL -->
+  <div id="editRoleModal" class="adm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="adm-modal-card small">
+      <div class="adm-modal-head">
+        <h3>Edit Career Role</h3>
+        <button id="editRoleCloseBtn" type="button" class="adm-mini-btn">Close</button>
+      </div>
+      <form id="editRoleForm" class="adm-form">
+        <label>
+          <span>Role Name</span>
+          <input id="editRoleName" type="text" required minlength="2" maxlength="100" />
+        </label>
+        <label>
+          <span>Display Order</span>
+          <input id="editRoleOrder" type="number" min="0" max="999" required />
+        </label>
+        <label>
+          <span>Description</span>
+          <input id="editRoleDesc" type="text" maxlength="255" />
+        </label>
+        <label>
+          <span>Status</span>
+          <select id="editRoleActive">
+            <option value="true">Active (Visible in Careers Form)</option>
+            <option value="false">Hidden (Archived)</option>
+          </select>
+        </label>
+        <div class="adm-modal-actions">
+          <button id="editRoleCancelBtn" type="button" class="adm-btn outline">Cancel</button>
+          <button type="submit" class="adm-btn primary">Save Role</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RESET USER PASSWORD MODAL -->
+  <div id="resetPwModal" class="adm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="adm-modal-card small">
+      <div class="adm-modal-head">
+        <h3>Reset User Password</h3>
+        <button id="resetPwCloseBtn" type="button" class="adm-mini-btn">Close</button>
+      </div>
+      <p id="resetPwTargetEmail" class="adm-muted"></p>
+      <form id="resetPwForm" class="adm-form">
+        <label>
+          <span>New Password (min 8 chars)</span>
+          <input id="resetPwInput" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+        </label>
+        <label>
+          <span>Confirm New Password</span>
+          <input id="resetPwConfirm" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+        </label>
+        <div class="adm-modal-actions">
+          <button id="resetPwCancelBtn" type="button" class="adm-btn outline">Cancel</button>
+          <button type="submit" class="adm-btn primary">Reset Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL (Mandatory before mutating Workspace data) -->
+  <div id="confirmModal" class="adm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="adm-modal-card small">
+      <h3 id="confirmTitle">Confirm Action</h3>
+      <p id="confirmDesc" class="adm-muted"></p>
+      <div class="adm-modal-actions">
+        <button id="confirmCancelBtn" type="button" class="adm-btn outline">Cancel</button>
+        <button id="confirmProceedBtn" type="button" class="adm-btn primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="admin-bundle.js"></script>
+</body>
+</html>

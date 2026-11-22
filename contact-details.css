@@ -1,0 +1,114 @@
+/* XBPO official contact details — shared across desktop and mobile */
+.footer-direct{display:grid;gap:7px;margin-top:14px;max-width:430px}
+.footer-direct a{display:flex;align-items:baseline;gap:10px;color:#eaf4ff;text-decoration:none;font-size:12px;line-height:1.45;min-width:0}
+.footer-direct a span{color:#79cfff;font:700 9px/1.2 Manrope,sans-serif;letter-spacing:.11em;min-width:42px}
+.footer-direct a strong{font-weight:600;color:#eaf4ff;overflow-wrap:anywhere}
+.footer-direct a:hover strong,.footer-direct a:focus-visible strong{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.footer-pro-bottom .footer-social{row-gap:8px}
+
+.home-direct-contact{display:grid;gap:8px;margin-top:28px;max-width:480px}
+.home-direct-contact a{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;color:#fff;text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.home-direct-contact span{font:700 9px/1 Manrope,sans-serif;letter-spacing:.12em;color:#74caff}
+.home-direct-contact strong{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.home-direct-contact a:hover strong,.home-direct-contact a:focus-visible strong{color:#77dfff}
+.socials{flex-wrap:wrap}
+
+.contact-direct-card{display:grid;gap:8px;margin:26px 0 8px}
+.contact-direct-card a{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label arrow" "value arrow";column-gap:18px;align-items:center;padding:15px 16px;border:1px solid rgba(20,87,190,.15);border-radius:14px;background:rgba(255,255,255,.72);color:#07162f;text-decoration:none;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.contact-direct-card a:hover,.contact-direct-card a:focus-visible{transform:translateY(-2px);border-color:rgba(0,119,255,.34);box-shadow:0 12px 32px rgba(7,22,47,.08)}
+.contact-direct-card small{grid-area:label;font:700 9px/1.2 Manrope,sans-serif;letter-spacing:.12em;color:#397ac8}
+.contact-direct-card strong{grid-area:value;margin-top:5px;font:700 13px/1.35 Manrope,sans-serif;overflow-wrap:anywhere}
+.contact-direct-card a>span{grid-area:arrow;font-size:16px}
+.route-social-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.route-social-links a{white-space:nowrap}
+
+@media(max-width:720px){
+  .footer-direct{width:100%;max-width:520px;margin:15px auto 0;gap:8px}
+  .footer-direct a{justify-content:center;text-align:center;flex-wrap:wrap;gap:6px 10px;font-size:11.5px}
+  .footer-direct a span{min-width:auto}
+  .footer-pro-bottom .footer-social{gap:14px!important}
+  .footer-pro-bottom .footer-social a{font-size:11px!important}
+  .home-direct-contact{max-width:100%;margin-top:24px}
+  .home-direct-contact a{grid-template-columns:48px minmax(0,1fr)}
+  .socials{gap:14px!important;flex-direction:row!important;align-items:center!important}
+  .contact-direct-card{margin-top:22px}
+}
+@media(max-width:390px){
+  .footer-direct a{font-size:10.8px}
+  .footer-pro-bottom .footer-social{gap:10px!important}
+  .footer-pro-bottom .footer-social a{font-size:10.5px!important}
+  .home-direct-contact strong{font-size:12.5px}
+  .contact-direct-card a{padding:13px 14px}
+  .contact-direct-card strong{font-size:12px}
+}
+
+/* Social icons — visual-only enhancement using the existing XBPO theme */
+.social-link{
+  display:inline-flex!important;
+  align-items:center;
+  gap:8px;
+  min-height:36px;
+  color:inherit;
+  text-decoration:none;
+}
+.social-icon{
+  width:30px;
+  height:30px;
+  flex:0 0 30px;
+  display:inline-grid;
+  place-items:center;
+  border:1px solid rgba(121,207,255,.28);
+  border-radius:50%;
+  background:rgba(255,255,255,.055);
+  color:#79cfff;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease;
+}
+.social-icon svg{width:17px;height:17px;display:block;fill:currentColor;stroke:currentColor;stroke-width:1.65}
+.social-icon svg rect,.social-icon svg circle{fill:none}
+.social-icon svg .social-dot{fill:currentColor;stroke:none}
+.social-icon-google .social-glyph{font:800 14px/1 Manrope,sans-serif;letter-spacing:-.04em}
+.social-link:hover .social-icon,.social-link:focus-visible .social-icon,
+.contact-social-link:hover .social-icon,.contact-social-link:focus-visible .social-icon{
+  transform:translateY(-2px) scale(1.04);
+  border-color:rgba(121,223,255,.7);
+  background:rgba(39,155,255,.13);
+  color:#b8efff;
+}
+.footer-pro-bottom .footer-social{align-items:center}
+.footer-pro-bottom .footer-social .social-link{padding:3px 0}
+.footer-pro-bottom .footer-social .social-label{font-size:12px;line-height:1.2}
+.socials .social-link{
+  border-bottom:0!important;
+  padding-bottom:0!important;
+  color:#fff;
+}
+.socials .social-icon{width:34px;height:34px;flex-basis:34px}
+.socials .social-label{font-size:12px;font-weight:600}
+.route-social-links .social-link{
+  gap:7px;
+  padding:4px 9px 4px 5px;
+  border:1px solid rgba(20,87,190,.13);
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+}
+.route-social-links .social-icon{width:27px;height:27px;flex-basis:27px;color:#1678d2;border-color:rgba(22,120,210,.2);background:rgba(22,120,210,.06)}
+.route-social-links .social-label{font-size:11px;font-weight:700;color:#0c376c}
+.contact-links .contact-social-link{
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:10px!important;
+}
+.contact-links .contact-social-link .social-icon{width:30px;height:30px;flex-basis:30px;color:#1678d2;border-color:rgba(22,120,210,.18);background:rgba(22,120,210,.06)}
+.contact-links .contact-social-link .social-label{min-width:0}
+.contact-links .contact-social-link .social-arrow{justify-self:end}
+
+@media(max-width:720px){
+  .footer-pro-bottom .footer-social{gap:12px!important}
+  .footer-pro-bottom .footer-social .social-link{flex-direction:column;gap:5px;min-width:56px}
+  .footer-pro-bottom .footer-social .social-icon{width:34px;height:34px;flex-basis:34px}
+  .footer-pro-bottom .footer-social .social-label{font-size:10.5px}
+  .socials .social-link{flex:1 1 92px;justify-content:flex-start}
+  .route-social-links{gap:8px}
+}
+
