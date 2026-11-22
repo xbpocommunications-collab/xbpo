@@ -34183,7 +34183,7 @@ function bindEvents() {
       showToast(err instanceof Error ? err.message : "Login failed.", "error");
     }
   });
-  $2("googleLoginBtn").addEventListener("click", () => {
+  document.getElementById("googleLoginBtn")?.addEventListener("click", () => {
     void connectGoogleWorkspace(true);
   });
   $2("connectGoogleBtn").addEventListener("click", () => {
